@@ -31,7 +31,7 @@ export default async function ShipmentsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="space-y-2">
-          <h1 className="text-2xl font-semibold tracking-tight">Shipment register</h1>
+          <h1 className="text-balance">Shipment register</h1>
           <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
             Immutable-style audit trail for imports: date, mass, CN code, and supplier. Emission
             factors power the default vs actual liability view.

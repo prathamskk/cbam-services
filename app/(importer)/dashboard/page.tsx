@@ -20,7 +20,7 @@ export default async function DashboardPage({
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+        <h1 className="text-balance">Dashboard</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Threshold intelligence: aggregate import mass by CN code versus the{" "}
           <strong>{THRESHOLD} tonne</strong> annual exemption band used in this MVP model.

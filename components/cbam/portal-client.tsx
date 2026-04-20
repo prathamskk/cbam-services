@@ -80,7 +80,7 @@ export function PortalClient({
   return (
     <div className="space-y-8">
       <div className="space-y-1">
-        <h1 className="text-2xl font-semibold tracking-tight">Supplier portal</h1>
+        <h1 className="text-balance">Supplier portal</h1>
         <p className="text-muted-foreground text-sm">
           You are signed in as <strong>{supplierName}</strong>. Upload evidence for your products
           only — other importers&apos; vendors are never visible here.

@@ -46,10 +46,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
-      <Card className="w-full max-w-md">
+    <div className="importer-canvas relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_-15%,oklch(0.55_0.14_158/0.18),transparent_55%)]"
+        aria-hidden
+      />
+      <Card className="relative w-full max-w-md shadow-lg ring-1 ring-primary/15">
         <CardHeader>
-          <CardTitle>Importer sign in</CardTitle>
+          <CardTitle className="text-xl sm:text-2xl">Importer sign in</CardTitle>
           <CardDescription>
             Compliance infrastructure for thresholds, evidence, and liability modelling.
           </CardDescription>
