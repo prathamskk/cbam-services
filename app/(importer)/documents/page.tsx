@@ -11,7 +11,7 @@ export default async function DocumentsPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-balance">Evidence vault</h1>
+        <h1 className="text-balance text-2xl text-foreground sm:text-3xl">Evidence vault</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Legal-grade file storage with review states. Files live in a private Supabase Storage
           bucket; metadata links supplier, optional CN code, and verification status.

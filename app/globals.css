@@ -136,12 +136,6 @@
     font-weight: 600;
     letter-spacing: -0.02em;
   }
-  h1 {
-    @apply text-2xl text-foreground sm:text-3xl;
-  }
-  h2 {
-    @apply text-xl text-foreground sm:text-2xl;
-  }
 }
 
 @layer components {
