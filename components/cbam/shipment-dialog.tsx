@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import type { ProductRow, SupplierRow } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 export function ShipmentDialog({
@@ -34,6 +34,18 @@ export function ShipmentDialog({
   const [supplierId, setSupplierId] = useState<string>("");
   const [productId, setProductId] = useState<string>("");
   const router = useRouter();
+
+  const supplierLabel = useMemo(() => {
+    if (!supplierId) return "Select supplier";
+    return suppliers.find((s) => s.id === supplierId)?.name ?? "Select supplier";
+  }, [supplierId, suppliers]);
+
+  const productLabel = useMemo(() => {
+    if (!productId) return "Select product";
+    const p = products.find((x) => x.id === productId);
+    if (!p) return "Select product";
+    return `${p.cn_code} — ${p.description ?? "Product"}`;
+  }, [productId, products]);
 
   async function action(fd: FormData) {
     try {
@@ -71,8 +83,8 @@ export function ShipmentDialog({
           <div className="space-y-2">
             <Label>Supplier</Label>
             <Select value={supplierId} onValueChange={(v) => setSupplierId(v ?? "")} required>
-              <SelectTrigger id="supplier_id">
-                <SelectValue placeholder="Select supplier" />
+              <SelectTrigger id="supplier_id" className="w-full min-w-0 max-w-full justify-between">
+                <SelectValue placeholder="Select supplier">{supplierLabel}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {suppliers.map((s) => (
@@ -86,8 +98,8 @@ export function ShipmentDialog({
           <div className="space-y-2">
             <Label>Product (CN)</Label>
             <Select value={productId} onValueChange={(v) => setProductId(v ?? "")} required>
-              <SelectTrigger id="product_id">
-                <SelectValue placeholder="Select product" />
+              <SelectTrigger id="product_id" className="w-full min-w-0 max-w-full justify-between">
+                <SelectValue placeholder="Select product">{productLabel}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {products.map((p) => (

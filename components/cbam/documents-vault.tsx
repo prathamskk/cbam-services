@@ -21,7 +21,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import { format } from "date-fns";
@@ -44,8 +44,18 @@ export function DocumentsVault({
   products: ProductRow[];
 }) {
   const router = useRouter();
-  const [supplierId, setSupplierId] = useState(suppliers[0]?.id ?? "");
+  const [supplierId, setSupplierId] = useState(() => suppliers[0]?.id ?? "");
   const [productId, setProductId] = useState<string>("none");
+
+  const supplierLabel = useMemo(() => {
+    if (!supplierId) return "Select supplier";
+    return suppliers.find((s) => s.id === supplierId)?.name ?? "Select supplier";
+  }, [supplierId, suppliers]);
+
+  const productLabel = useMemo(() => {
+    if (productId === "none") return "None";
+    return products.find((p) => p.id === productId)?.cn_code ?? "CN code";
+  }, [productId, products]);
 
   const onDrop = useCallback(
     async (files: File[]) => {
@@ -110,8 +120,8 @@ export function DocumentsVault({
             <div className="space-y-2">
               <span className="text-sm font-medium">Supplier</span>
               <Select value={supplierId} onValueChange={(v) => setSupplierId(v ?? "")}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Supplier" />
+                <SelectTrigger className="w-full min-w-0 max-w-full justify-between">
+                  <SelectValue placeholder="Select supplier">{supplierLabel}</SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {suppliers.map((s) => (
@@ -125,8 +135,8 @@ export function DocumentsVault({
             <div className="space-y-2">
               <span className="text-sm font-medium">Product (optional)</span>
               <Select value={productId} onValueChange={(v) => setProductId(v ?? "none")}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Link to CN (optional)" />
+                <SelectTrigger className="w-full min-w-0 max-w-full justify-between">
+                  <SelectValue placeholder="CN (optional)">{productLabel}</SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">None</SelectItem>

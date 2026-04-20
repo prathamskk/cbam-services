@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import { format } from "date-fns";
@@ -46,6 +46,11 @@ export function PortalClient({
 }) {
   const router = useRouter();
   const [productId, setProductId] = useState<string>("none");
+
+  const productLabel = useMemo(() => {
+    if (productId === "none") return "None";
+    return products.find((p) => p.id === productId)?.cn_code ?? "CN code";
+  }, [productId, products]);
 
   const onDrop = useCallback(
     async (files: File[]) => {
@@ -96,8 +101,8 @@ export function PortalClient({
           <div className="max-w-sm space-y-2">
             <span className="text-sm font-medium">Product (optional)</span>
             <Select value={productId} onValueChange={(v) => setProductId(v ?? "none")}>
-              <SelectTrigger>
-                <SelectValue placeholder="CN code" />
+              <SelectTrigger className="w-full min-w-0 max-w-full justify-between">
+                <SelectValue placeholder="CN code">{productLabel}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="none">None</SelectItem>
